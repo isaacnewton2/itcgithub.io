@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: rgb(255, 194, 179);
+            text-align: center;
+            font-family: 'Roboto';
+        }
+        a {
+            color: red;
+        }
+        a:hover {
+            color: blueviolet;
+        }
+        #UserInput{
+        text-align: right;
+    }
+    </style>
+</head>
+<body>
+    <h1>Jed Mearns ITC Project</h1>
+    <h2>N Numbers Calculator</h2><br>
+
+    <label for="UserInput">Input the value you want to convert</label><br>
+    <input id="UserInput" type="number"><br>
+
+    <select name="compute" id="itemdesc">
+        <option value="LMTF">Meters To Feet</option>
+        <option value="LFTM">Feet To Meters</option>
+        <option value="TFTC">Fahrenheit To Celsius</option>
+        <option value="TCTF">Celsius to Fahrenheit</option>
+    </select>
+
+    <button id="Calculate">Enter</button><br>
+    <h3 id="Values"></h3>
+    <a href="IndexMearns.html"> Back to Index</a>
+
+    <script>
+        const output = document.getElementById('Values');
+        const itemdesc = document.getElementById('itemdesc');
+
+        document.getElementById("Calculate").addEventListener("click", () => {
+            var y, UserInput = document.getElementById('UserInput').value * 1;
+            
+            if (itemdesc.value === "LMTF") {
+                UserInput = UserInput * 3.2808;
+                y = "Feet";
+            }
+            if (itemdesc.value === "LFTM") {
+                UserInput = UserInput / 3.2808;
+                y = "Meters";
+            }
+            if (itemdesc.value === "TFTC") {
+                UserInput = (UserInput - 32) * 5 / 9;
+                y = "Celsius";
+            }
+            if (itemdesc.value === "TCTF") {
+                UserInput = UserInput * 9 / 5 + 32;
+                y = "Fahrenheit";
+            }
+
+            output.innerHTML = UserInput.toFixed(2) + " " + y;
+        });
+    </script>
+</body>
+</html>

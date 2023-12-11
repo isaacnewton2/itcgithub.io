@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: rgb(255, 194, 179);
+            text-align: center;
+            font-family: 'Roboto';
+        }
+        a {
+            color: red;
+        }
+        a:hover {
+            color: blueviolet;
+        }
+        table {
+            border: 1px solid black;
+            background-color: azure;
+            margin: 0 auto;
+            text-align: right;
+        }
+        input{
+            text-align: right;
+        }
+        td{
+            border:1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jed Mearns ITC Project</h1>
+    <h2>Payroll</h2><br>
+    <table>
+        <thead>
+            <tr>
+                <td>Number</td>
+                <td>Employee Name</td>
+                <td>Days Worked</td>
+                <td>Daily Rate</td>
+                <td>GrossPay</td>
+                <td>Deduction Amount</td>
+                <td>Net Pay</td>
+            </tr>
+        </thead>
+        <tbody id="TableBody"></tbody>
+    </table>
+    <label for="Name">Employee Name</label><br>
+    <input id="Name" type='text'><br>
+
+    <label for="Days">Days Worked</label><br>
+    <input id="Days" type='text'><br>
+
+    <label for="Rate">Daily Rate</label><br>
+    <input id="Rate" type='text'><br>
+
+    <label for="Deduct">Deduction Amount</label><br>
+    <input id="Deduct" type='text'><br>
+    <br>
+    <button id="Entry">Enter</button> 
+    <button id="ClearTable">Clear Table</button>
+    <br><br>
+    <label for="DeleteInd">Delete Specific Index</label><br>
+    <input id="DeleteInd" type='number'><br>
+    <button id="Delete">Enter</button> 
+    <br>
+    <a href="IndexMearns.html"> Back to Index</a>
+
+    <dialog id="DGBox">
+        <form method="dialog">
+            <h4 id="dlgmsg">Delete?</h4>
+            <button id="confirm" value="confirm">Yes</button>
+            <button id="Cancel" value="Cancel" onclick="BoxClose()">No</button>
+        </form>
+    </dialog>
+    <script>
+        function BoxClose(){
+            var confirm =document.getElementById('DGBox')
+            confirm.close
+        }
+        let counter = 0;
+        var payroll = [];
+        const TableBody = document.getElementById('TableBody');
+
+        function clearTable() {
+    var DGBox = document.getElementById('DGBox');
+    DGBox.showModal();
+
+    document.getElementById('confirm').onclick = function () {
+        payroll = []
+        counter = 0;
+        DGBox.close(); // Close the dialog after confirmation
+        display();
+     };
+    }
+
+
+        function display() {
+            TableBody.innerHTML = '';
+            for (let i = 0; i < counter; i++) {
+                const { Name, DaysWorked, DailyRate, Deduction,Gross, NetPay } = payroll[i];
+                TableBody.innerHTML += `<tr><td>${i + 1}</td><td>${Name}</td><td>${DaysWorked}</td><td>${DailyRate.toFixed(2)}</td><td>${Gross.toFixed(2)}</td><td>${Deduction.toFixed(2)}</td><td>${NetPay.toFixed(2)}</td></tr>`;
+            }
+        }
+
+        document.getElementById("ClearTable").addEventListener("click", clearTable);
+
+        document.getElementById("Entry").addEventListener("click", () => { 
+            const employee = {
+                Name: document.getElementById('Name').value,
+                DaysWorked: document.getElementById('Days').value*1,
+                DailyRate: document.getElementById('Rate').value*1,
+                Deduction: document.getElementById('Deduct').value*1,
+                Gross : 0,
+                NetPay: 0
+            };
+
+            employee.Gross = employee.DaysWorked * employee.DailyRate;
+            employee.NetPay = employee.Gross- employee.Deduction
+            payroll.push(employee);
+            counter++;
+            display();
+        });
+        
+        document.getElementById("Delete").addEventListener("click",
+   ()=>{
+    var DGBox = document.getElementById('DGBox');
+        DGBox.showModal();
+         document.getElementById('confirm').addEventListener('click', function () {
+        payroll.splice(document.getElementById('DeleteInd').value-1,1 );
+        display();
+         })
+    })
+    </script>
+</body>
+</html>

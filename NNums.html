@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: rgb(224, 255, 184);
+            text-align: center;
+            font-family: 'Roboto';
+        }
+        a {
+            color: red;
+        }
+        a:hover {
+            color: blueviolet;
+        }
+        #UserInput{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jed Mearns ITC Project</h1>
+    <h2>N Numbers Calculator</h2><br>
+
+    <label for="UserInput">Input the value for N</label><br>
+    <input id="UserInput" type="number"><br>
+    <button id="Calculate">Enter</button><br>
+    <h3 id="NValues"></h3>
+    <a href="IndexMearns.html"> Back to Index</a>
+
+    <script>
+        function FactorialN() {
+            let x = document.getElementById("UserInput").value * 1;
+            let counter = x;
+            while (counter > 1) {
+                counter -= 1;
+                x *= counter;
+            }
+            return x;
+        }
+
+        function SumN() {
+            let x = document.getElementById("UserInput").value * 1;
+            let counter = x;
+            do {
+                counter -= 1;
+                x += counter;
+            } while (counter > 1)
+            return x;
+        }
+
+        function AverageN() {
+            let sum = 0;
+            let x = document.getElementById("UserInput").value * 1;
+            for (let i = 1; i <= x; ++i) {
+                sum += i;
+            }
+            return sum / x;
+        }
+
+        document.getElementById("Calculate").addEventListener("click", () => {
+            const Fact = FactorialN().toFixed(0);
+            const Summ = SumN().toFixed(0);
+            const Ave = AverageN().toFixed(0);
+            document.getElementById('NValues').innerHTML = "N's Factorial = " + Fact + "<br>" +
+                "Summation of first N numbers = " + Summ + "<br>Average of first N numbers =" + Ave + "<br>";
+        });
+    </script>
+</body>
+</html>

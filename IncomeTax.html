@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<style>
+    body{
+        background-color: rgb(224, 255, 235);
+        text-align: center;
+        font-family: 'Roboto'}
+        a{color:red}
+    a:hover{color:blueviolet}
+    #UserIncome{
+        text-align: right;
+    }
+</style>
+  
+<body>
+    <h1>Jed Mearns ITC Project</h1>
+    <h2>Income Tax Calculator</h2><br>
+
+    <label for="UserIncome">Input your income</label><br>
+    <input id="UserIncome" type="number"><br>
+    <button id="Calculate">Enter</button><br>
+    <h3 id="TaxOutput"></h3>
+    <a href="IndexMearns.html"> Back to Index</a>
+</body>
+<script>
+
+    const Taxation =  document.getElementById('TaxOutput');
+
+
+   document.getElementById("Calculate").addEventListener("click",
+   ()=>{
+        
+        let Tax = 0
+        let x = document.getElementById('UserIncome').value*1
+
+    switch(true){
+        case (x>=8000000):
+        Tax = 2410000+((x-8000000)*0.35);
+        Taxation.innerHTML = "Your income tax is ₱" +Tax.toFixed(2);
+        break;
+
+        case (x>=2000000):
+        Tax = 490000 + ((x-2000000)*0.32)
+        Taxation.innerHTML = "Your income tax is ₱" +Tax.toFixed(2);
+            break;
+
+        case (x>=800000):
+            Tax = 130000 + ((x-800000)*0.3)
+            Taxation.innerHTML = "Your income tax is ₱" +Tax.toFixed(2);
+            break;
+
+        case (x>=400000):
+            Tax = 30000 + ((x-400000)*0.25)
+            Taxation.innerHTML = "Your income tax is ₱" +Tax.toFixed(2);
+            break;
+        case (x>=250000):
+            Tax = ((x-250000)*0.20)
+            Taxation.innerHTML = "Your income tax is ₱" +Tax.toFixed(2);
+            break;
+        case (x<250000):
+            Taxation.innerHTML = "Your income tax is ₱"+ Tax.toFixed(2);
+            break;
+         }
+   })
+  
+</script>
+</html>
